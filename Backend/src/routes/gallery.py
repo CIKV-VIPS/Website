@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify #type:ignore
 from models.gallery_model import GalleryImage #type:ignore
-from extensions import db #type:ignore
+from Backend.extensions import db #type:ignore
 
 gallery_bp = Blueprint("gallery_bp", __name__)
 

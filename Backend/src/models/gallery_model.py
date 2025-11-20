@@ -1,5 +1,5 @@
 from datetime import datetime
-from extensions import db
+from Backend.extensions import db
 
 class GalleryImage(db.Model):
     __tablename__ = 'gallery_images'

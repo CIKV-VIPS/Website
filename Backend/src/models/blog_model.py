@@ -1,5 +1,5 @@
 from datetime import datetime
-from extensions import db
+from Backend.extensions import db
 
 class Blog(db.Model):
     __tablename__ = 'blogs'
