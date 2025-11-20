@@ -16,7 +16,7 @@ def create_app():
     # Init extensions
     db.init_app(app)
     jwt.init_app(app)
-    CORS(app)
+    CORS(app, origins=["https://website-nine-bay-86.vercel.app"])
 
     # Register blueprints
     app.register_blueprint(auth_bp, url_prefix='/api')
