@@ -9,7 +9,7 @@ import About from "./pages/About";
 import Events from "./pages/Events";
 import Gallery from "./pages/Gallery";
 import Blogs from "./pages/Blogs";
-import ContactUs from "./pages/contactUs";
+import ContactUs from "./pages/contactUs.jsx";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
