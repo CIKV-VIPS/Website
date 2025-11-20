@@ -49,11 +49,11 @@ export default function Footer() {
                className="p-2 rounded-full hover:bg-amber-800 transition duration-200" aria-label="Instagram">
               <FaInstagram size={22} />
             </a>
-            <a href="https://linkedin.com/company/cikv" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.linkedin.com/company/centre-for-indian-knowledge-and-values/" target="_blank" rel="noopener noreferrer"
                className="p-2 rounded-full hover:bg-amber-800 transition duration-200" aria-label="LinkedIn">
               <FaLinkedin size={22} />
             </a>
-            <a href="mailto:info@cikv.org"
+            <a href="mailto:indianknowledgeandvaluesvips@gmail.com"
                className="p-2 rounded-full hover:bg-amber-800 transition duration-200" aria-label="Email">
               <FaEnvelope size={22} />
             </a>
