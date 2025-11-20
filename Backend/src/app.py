@@ -25,6 +25,10 @@ def create_app():
     app.register_blueprint(gallery_bp, url_prefix='/api')
     app.register_blueprint(forms_bp, url_prefix='/api')
 
+    @app.route('/')
+    def index():
+        return jsonify({"message": "running"})
+
     # Error handlers to return JSON instead of HTML
     @app.errorhandler(404)
     def not_found(error):
