@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from models.form_model import Form
-from Backend.extensions import db
+from ..models.form_model import Form
+from ..extensions import db
 from flask_jwt_extended import jwt_required
 
 forms_bp = Blueprint("forms_bp", __name__)

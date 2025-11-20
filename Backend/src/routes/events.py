@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify #type:ignore
-from models.event_model import Event
-from Backend.extensions import db #type:ignore
+from ..models.event_model import Event
+from ..extensions import db #type:ignore
 from datetime import datetime
 
 event_bp = Blueprint("event_bp", __name__)

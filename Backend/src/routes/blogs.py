@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify #type:ignore
-from models.blog_model import Blog 
-from Backend.extensions import db #type:ignore
+from ..models.blog_model import Blog 
+from ..extensions import db #type:ignore
 
 blog_bp = Blueprint("blog_bp", __name__)
 

@@ -1,4 +1,4 @@
-from Backend.extensions import db
+from ..extensions import db
 
 class Form(db.Model):
     id = db.Column(db.Integer, primary_key=True)
