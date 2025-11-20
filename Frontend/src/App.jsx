@@ -33,7 +33,6 @@ const AppContent = () => {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/forms" element={<Forms />} />
-          <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route element={<ProtectedRoute />}>
