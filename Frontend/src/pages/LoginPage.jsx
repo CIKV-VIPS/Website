@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import cikvLogo from '../assets/cikv_logo.jpeg'; // Assuming you have the logo
 
+import api from '../api';
+
 export default function LoginPage() {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
@@ -15,21 +17,12 @@ export default function LoginPage() {
     setError(null);
 
     try {
-      const response = await fetch('/api/login', {
+      const data = await api.fetch('/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId, password: password })
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Login failed. Please try again.');
-      }
       
       // --- ON SUCCESS ---
-      // In a real app, you would save the user/token to context or local storage
-      // For now, we just redirect to the dashboard.
       localStorage.setItem('authToken', data.access_token);
       navigate('/dashboard'); 
 

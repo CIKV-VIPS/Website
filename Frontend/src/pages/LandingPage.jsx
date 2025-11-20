@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react'; // Import hooks
 import cikvLandingBanner from '../assets/cikv_landing_banner.png';
+import api from '../api';
 
 // sampleEvents array is no longer needed, so it's removed.
 
@@ -17,13 +18,7 @@ export default function LandingPage() {
 
   // --- Fetch events on component mount ---
   useEffect(() => {
-    fetch('/api/events/')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
+    api.fetch('/events/')
       .then(data => {
         // --- Filter, Sort, and Slice ---
         const today = new Date();

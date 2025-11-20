@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { HiArrowLeft } from 'react-icons/hi'; // Using a standard icon for "back"
 import cikvBanner2 from '../assets/cikv_banner2.png';
+import api from '../api';
 
 // --- Main Blogs Page Component ---
 // This component manages whether to show the 'list' or 'detail' view.
@@ -29,13 +30,7 @@ function BlogList({ setView }) {
   useEffect(() => {
     // Fetch blogs from your Flask backend API
     // (Adding /api/ prefix for consistency with your other pages)
-    fetch('/api/blogs/')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
+    api.fetch('/blogs/')
       .then(data => {
         setBlogs(data);
         setIsLoading(false);
@@ -112,13 +107,7 @@ function BlogDetail({ blogId, setView }) {
 
   useEffect(() => {
     // Fetch a single blog from your API
-    fetch(`/api/blogs/${blogId}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Blog post not found');
-        }
-        return response.json();
-      })
+    api.fetch(`/blogs/${blogId}`)
       .then(data => {
         setBlog(data);
         setIsLoading(false);

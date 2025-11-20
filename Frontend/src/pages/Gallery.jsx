@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // Removed unused 'Link' import
 import { HiArrowLeft, HiOutlineX } from 'react-icons/hi';
 import cikvBanner2 from '../assets/cikv_banner2.png';
+import api from '../api';
 
 // --- Main Gallery Page Component ---
 // This component manages whether to show the 'album-list' or 'album-detail' view.
@@ -30,13 +31,7 @@ function AlbumList({ setView }) {
   useEffect(() => {
     // --- UPDATED API PATH ---
     // Fetch all images from your Flask backend API
-    fetch('/api/gallery/')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
+    api.fetch('/gallery/')
       .then(data => {
         // Group the images by event_name
         const grouped = data.reduce((acc, image) => {
@@ -120,13 +115,7 @@ function AlbumDetail({ eventName, setView }) {
   useEffect(() => {
     // --- UPDATED API PATH ---
     // Fetch all images for this specific event
-    fetch(`/api/gallery/events/${encodeURIComponent(eventName)}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Could not find images for this event');
-        }
-        return response.json();
-      })
+    api.fetch(`/gallery/events/${encodeURIComponent(eventName)}`)
       .then(data => {
         setImages(data);
         setIsLoading(false);

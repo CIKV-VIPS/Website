@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import cikvLogo from '../assets/cikv_logo.jpeg';
 
+import api from '../api';
+
 export default function RegisterPage() {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
@@ -17,17 +19,10 @@ export default function RegisterPage() {
     setSuccess(false);
 
     try {
-      const response = await fetch('/api/register', {
+      await api.fetch('/register', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: userId, password: password })
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Registration failed. Please try again.');
-      }
       
       // --- ON SUCCESS ---
       setSuccess(true);

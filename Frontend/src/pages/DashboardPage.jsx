@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HiOfficeBuilding, HiPencilAlt, HiPhotograph, HiCalendar, HiLogout, HiPlus, HiTrash, HiPencil, HiX, HiChevronDown, HiChevronUp } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import FormsPage from './Forms';
+import api from '../api';
 
 // --- Main Dashboard Page Component ---
 // This holds the layout and manages which panel is active
@@ -190,8 +191,7 @@ function EventPanel() {
   // --- Fetch All Events ---
   const fetchEvents = () => {
     setIsLoading(true);
-    fetch('/api/events/')
-      .then(res => res.json())
+    api.fetch('/events/')
       .then(data => {
         setEvents(data);
         setIsLoading(false);
@@ -226,17 +226,12 @@ function EventPanel() {
   // --- Handle Form Submission (Create/Update) ---
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = isEditMode ? `/api/events/${editingId}` : '/api/events/';
+    const url = isEditMode ? `/events/${editingId}` : '/events/';
     const method = isEditMode ? 'PUT' : 'POST';
 
-    fetch(url, {
+    api.fetch(url, {
       method: method,
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(currentEvent),
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('Submission failed');
-      return res.json();
     })
     .then(() => {
       setShowForm(false);
@@ -248,9 +243,8 @@ function EventPanel() {
   // --- Handle Delete ---
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this event?')) {
-      fetch(`/api/events/${id}`, { method: 'DELETE' })
-        .then(res => {
-          if (!res.ok) throw new Error('Delete failed');
+      api.fetch(`/events/${id}`, { method: 'DELETE' })
+        .then(() => {
           fetchEvents(); // Refresh list
         })
         .catch(err => setError(err.message));
@@ -335,8 +329,7 @@ function BlogPanel() {
   // --- Fetch All Blogs ---
   const fetchBlogs = () => {
     setIsLoading(true);
-    fetch('/api/blogs/')
-      .then(res => res.json())
+    api.fetch('/blogs/')
       .then(data => {
         setBlogs(data);
         setIsLoading(false);
@@ -369,17 +362,12 @@ function BlogPanel() {
   // --- Handle Form Submission (Create/Update) ---
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = isEditMode ? `/api/blogs/${editingId}` : '/api/blogs/';
+    const url = isEditMode ? `/blogs/${editingId}` : '/blogs/';
     const method = isEditMode ? 'PUT' : 'POST';
 
-    fetch(url, {
+    api.fetch(url, {
       method: method,
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(currentBlog),
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('Submission failed');
-      return res.json();
     })
     .then(() => {
       setShowForm(false);
@@ -391,9 +379,8 @@ function BlogPanel() {
   // --- Handle Delete ---
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this blog post?')) {
-      fetch(`/api/blogs/${id}`, { method: 'DELETE' })
-        .then(res => {
-          if (!res.ok) throw new Error('Delete failed');
+      api.fetch(`/blogs/${id}`, { method: 'DELETE' })
+        .then(() => {
           fetchBlogs(); // Refresh list
         })
         .catch(err => setError(err.message));
@@ -476,8 +463,7 @@ function GalleryPanel() {
   // --- Fetch All Images ---
   const fetchImages = () => {
     setIsLoading(true);
-    fetch('/api/gallery/')
-      .then(res => res.json())
+    api.fetch('/gallery/')
       .then(data => {
         setImages(data);
         setIsLoading(false);
@@ -501,14 +487,9 @@ function GalleryPanel() {
   // --- Handle Form Submission (Create) ---
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('/api/gallery/', {
+    api.fetch('/gallery/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(currentImage),
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('Submission failed');
-      return res.json();
     })
     .then(() => {
       setShowForm(false);
@@ -520,9 +501,8 @@ function GalleryPanel() {
   // --- Handle Delete ---
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this image?')) {
-      fetch(`/api/gallery/${id}`, { method: 'DELETE' })
-        .then(res => {
-          if (!res.ok) throw new Error('Delete failed');
+      api.fetch(`/gallery/${id}`, { method: 'DELETE' })
+        .then(() => {
           fetchImages(); // Refresh list
         })
         .catch(err => setError(err.message));
@@ -605,8 +585,7 @@ function FormPanel() {
   // --- Fetch All Forms ---
   const fetchForms = () => {
     setIsLoading(true);
-    fetch('/api/forms')
-      .then(res => res.json())
+    api.fetch('/forms')
       .then(data => {
         setForms(data);
         setIsLoading(false);
@@ -639,20 +618,12 @@ function FormPanel() {
   // --- Handle Form Submission (Create/Update) ---
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = isEditMode ? `/api/forms/${editingId}` : '/api/forms';
+    const url = isEditMode ? `/forms/${editingId}` : '/forms';
     const method = isEditMode ? 'PUT' : 'POST';
 
-    fetch(url, {
+    api.fetch(url, {
       method: method,
-      headers: { 
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-      },
       body: JSON.stringify(currentForm),
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('Submission failed');
-      return res.json();
     })
     .then(() => {
       setShowForm(false);
@@ -664,14 +635,10 @@ function FormPanel() {
   // --- Handle Delete ---
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this form?')) {
-      fetch(`/api/forms/${id}`, { 
+      api.fetch(`/forms/${id}`, { 
         method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-        }
       })
-        .then(res => {
-          if (!res.ok) throw new Error('Delete failed');
+        .then(() => {
           fetchForms(); // Refresh list
         })
         .catch(err => setError(err.message));

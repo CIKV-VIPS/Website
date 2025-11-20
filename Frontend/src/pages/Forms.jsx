@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '../api';
 
 export default function Forms() {
   const [activeForms, setActiveForms] = useState([]);
@@ -9,8 +10,7 @@ export default function Forms() {
   useEffect(() => {
     const fetchForms = () => {
       setIsLoading(true);
-      fetch('/api/forms')
-        .then(res => res.json())
+      api.fetch('/forms')
         .then(data => {
           const active = data.filter(form => form.status === 'active');
           const inactive = data.filter(form => form.status === 'inactive');
