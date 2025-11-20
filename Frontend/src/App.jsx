@@ -9,13 +9,12 @@ import About from "./pages/About";
 import Events from "./pages/Events";
 import Gallery from "./pages/Gallery";
 import Blogs from "./pages/Blogs";
-import ContactUs from "./pages/contactUs.jsx";
+import ContactUs from "./pages/ContactUs";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Forms from "./pages/Forms";
-import ContactUs from "./pages/contactUs.jsx";
 
 const AppContent = () => {
   const location = useLocation();
