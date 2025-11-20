@@ -9,7 +9,6 @@ import About from "./pages/About";
 import Events from "./pages/Events";
 import Gallery from "./pages/Gallery";
 import Blogs from "./pages/Blogs";
-import ContactUs from "./pages/contactUs";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
@@ -31,7 +30,6 @@ const AppContent = () => {
           <Route path="/events" element={<Events />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/blogs" element={<Blogs />} />
-          <Route path="/contact" element={<ContactUs />} />
           <Route path="/forms" element={<Forms />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
